@@ -1,0 +1,111 @@
+<style>
+html,body{margin:0;padding:0;background:#05070a;}
+*{box-sizing:border-box;}
+a{color:#b8d4f2;}a:hover{color:#ffffff;}
+input::placeholder,textarea::placeholder{color:#7d8794;}
+input:-webkit-autofill{-webkit-text-fill-color:#f2f4f7;-webkit-box-shadow:0 0 0 1000px #0b0f15 inset;}
+</style>
+</helmet>
+<main style="position:relative;min-height:100vh;width:100%;overflow:hidden;background:#05070a;font-family:'Manrope',system-ui,sans-serif;color:#f2f4f7;">
+  <div style="position:absolute;inset:0;background-image:{{ bgImage }};background-size:{{ bgSize }};background-position:{{ bgPos }};background-repeat:no-repeat;"></div>
+  <div style="position:absolute;inset:0;background:{{ overlay }};"></div>
+  <div style="position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:{{ justify }};padding:clamp(28px,6vw,96px) clamp(22px,7vw,120px);">
+    <div style="width:100%;max-width:460px;display:flex;flex-direction:column;gap:clamp(28px,4vw,44px);">
+      <div style="display:flex;flex-direction:column;gap:20px;">
+        <h1 style="margin:0;font-family:'Raleway',sans-serif;font-weight:600;text-transform:uppercase;text-shadow:0 2px 18px rgba(0,0,0,0.85),0 1px 3px rgba(0,0,0,0.9);font-size:clamp(44px,6.4vw,84px);letter-spacing:-0.03em;line-height:0.95;">Metatron</h1>
+        <p style="margin:0;font-size:clamp(16px,1.25vw,18px);line-height:1.6;color:#e6eaf0;text-shadow:0 1px 3px rgba(0,0,0,0.95),0 0 14px rgba(0,0,0,0.9),0 0 28px rgba(0,0,0,0.7);text-wrap:pretty;">We’re launching soon to fix predictive blind spots. Drop us a note to test early insights on your own data or talk with our founding team.</p>
+      </div>
+
+      <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;gap:10px;padding:24px 0;border-top:1px solid rgba(184,212,242,0.35);">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#b8d4f2;">Message received</span>
+          <p style="margin:0;font-size:17px;line-height:1.55;color:#e6eaf0;">Thanks, {{ firstName }}. We’ll be in touch at {{ email }} shortly.</p>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ showForm }}" hint-placeholder-val="{{ true }}">
+        <form novalidate="" sc-camel-on-submit="{{ submit }}" style="display:flex;flex-direction:column;gap:22px;">
+          <label style="display:flex;flex-direction:column;gap:8px;">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#c3cbd6;text-shadow:0 1px 3px rgba(0,0,0,0.95),0 0 12px rgba(0,0,0,0.85);">Name <span style="color:#b8d4f2;">*</span></span>
+            <input type="text" name="name" sc-camel-auto-complete="name" placeholder="Full name" value="{{ name }}" sc-camel-on-change="{{ onName }}" sc-camel-on-blur="{{ blurName }}" aria-invalid="{{ nameInvalid }}" style="width:100%;height:50px;padding:0 16px;font:inherit;font-size:16px;color:#f2f4f7;background:rgba(10,14,20,0.72);border:1px solid {{ nameBorder }};border-radius:4px;outline:none;backdrop-filter:blur(6px);transition:border-color .15s;" style-focus="border-color:#b8d4f2;">
+            <sc-if value="{{ nameError }}" hint-placeholder-val="{{ false }}"><span style="font-size:13px;color:#ff9b8f;">{{ nameError }}</span></sc-if>
+          </label>
+          <label style="display:flex;flex-direction:column;gap:8px;">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#c3cbd6;text-shadow:0 1px 3px rgba(0,0,0,0.95),0 0 12px rgba(0,0,0,0.85);">Email address <span style="color:#b8d4f2;">*</span></span>
+            <input type="email" name="email" sc-camel-auto-complete="email" sc-camel-input-mode="email" placeholder="name@work-email.com" value="{{ email }}" sc-camel-on-change="{{ onEmail }}" sc-camel-on-blur="{{ blurEmail }}" aria-invalid="{{ emailInvalid }}" style="width:100%;height:50px;padding:0 16px;font:inherit;font-size:16px;color:#f2f4f7;background:rgba(10,14,20,0.72);border:1px solid {{ emailBorder }};border-radius:4px;outline:none;backdrop-filter:blur(6px);transition:border-color .15s;" style-focus="border-color:#b8d4f2;">
+            <sc-if value="{{ emailError }}" hint-placeholder-val="{{ false }}"><span style="font-size:13px;color:#ff9b8f;">{{ emailError }}</span></sc-if>
+          </label>
+          <label style="display:flex;flex-direction:column;gap:8px;">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#c3cbd6;text-shadow:0 1px 3px rgba(0,0,0,0.95),0 0 12px rgba(0,0,0,0.85);">Note <span style="text-transform:none;letter-spacing:0;color:#8a94a1;">(optional)</span></span>
+            <textarea name="note" rows="4" placeholder="leave us a note" value="{{ note }}" sc-camel-on-change="{{ onNote }}" style="width:100%;min-height:112px;padding:14px 16px;font:inherit;font-size:16px;line-height:1.5;color:#f2f4f7;background:rgba(10,14,20,0.72);border:1px solid rgba(184,212,242,0.28);border-radius:4px;outline:none;resize:vertical;backdrop-filter:blur(6px);transition:border-color .15s;" style-focus="border-color:#b8d4f2;"></textarea>
+          </label>
+          <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap;padding-top:4px;">
+            <button type="submit" disabled="{{ sending }}" style="height:52px;padding:0 30px;font:inherit;font-size:15px;font-weight:600;letter-spacing:0.02em;color:{{ btnColor }};background:{{ btnBg }};border:1px solid #e6eef8;border-radius:4px;cursor:pointer;transition:background .15s,color .15s;" style-hover="background:#ffffff;color:#05070a;">{{ btnLabel }}</button>
+            <sc-if value="{{ submitError }}" hint-placeholder-val="{{ false }}"><span style="font-size:13px;color:#ff9b8f;">{{ submitError }}</span></sc-if>
+          </div>
+        </form>
+      </sc-if>
+    </div>
+  </div>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script="" data-props="{&quot;formEndpoint&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Form&quot;},&quot;buttonStyle&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;solid&quot;,&quot;outline&quot;],&quot;default&quot;:&quot;solid&quot;,&quot;tsType&quot;:&quot;'solid'|'outline'&quot;,&quot;section&quot;:&quot;Form&quot;}}">
+class Component extends DCLogic {
+  state = { name: '', email: '', note: '', touched: {}, sent: false, sending: false, submitError: '', w: typeof window !== 'undefined' ? window.innerWidth : 1440 };
+  componentDidMount() { this.onResize = () => this.setState({ w: window.innerWidth }); window.addEventListener('resize', this.onResize); }
+  componentWillUnmount() { window.removeEventListener('resize', this.onResize); }
+  errors() {
+    const { name, email } = this.state;
+    const e = {};
+    if (!name.trim()) e.name = 'Please enter your name.';
+    if (!email.trim()) e.email = 'Please enter your email address.';
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.trim())) e.email = 'Please enter a valid email, e.g. name@company.com';
+    return e;
+  }
+  async submit(ev) {
+    ev.preventDefault();
+    this.setState({ touched: { name: true, email: true } });
+    if (Object.keys(this.errors()).length) return;
+    const endpoint = (this.props.formEndpoint || '').trim();
+    const payload = { name: this.state.name.trim(), email: this.state.email.trim(), note: this.state.note.trim() };
+    if (!endpoint) { this.setState({ sent: true }); return; }
+    this.setState({ sending: true, submitError: '' });
+    try {
+      const r = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(payload) });
+      if (!r.ok) throw new Error();
+      this.setState({ sent: true, sending: false });
+    } catch (_) { this.setState({ sending: false, submitError: 'Something went wrong. Please try again.' }); }
+  }
+  renderVals() {
+    const s = this.state, e = this.errors();
+    const mobile = s.w < 820;
+    const nameError = s.touched.name ? e.name || '' : '';
+    const emailError = s.touched.email ? e.email || '' : '';
+    const solid = (this.props.buttonStyle ?? 'solid') === 'solid';
+    const ok = 'rgba(184,212,242,0.28)', bad = '#ff9b8f';
+    return {
+      ...s,
+      showForm: !s.sent,
+      firstName: s.name.trim().split(/\s+/)[0],
+      bgImage: (() => { const r = (typeof window !== 'undefined' && window.__resources) || {}; const u = mobile ? (r.bgMobile || 'assets/bg-mobile.webp') : (r.bgDesktop || 'assets/bg-desktop.webp'); return 'url("' + u + '")'; })(),
+      bgPos: mobile ? '88% 0%' : '70% center',
+      bgSize: mobile ? '210% auto' : 'cover',
+      overlay: mobile
+        ? 'linear-gradient(180deg, rgba(5,7,10,0) 0px, rgba(5,7,10,0) 160px, rgba(5,7,10,0.7) 320px, #05070a 440px)'
+        : 'linear-gradient(90deg, rgba(5,7,10,0.85) 0%, rgba(5,7,10,0.55) 35%, rgba(5,7,10,0) 60%)',
+      justify: mobile ? 'flex-end' : 'center',
+      nameError, emailError,
+      nameInvalid: !!nameError, emailInvalid: !!emailError,
+      nameBorder: nameError ? bad : ok, emailBorder: emailError ? bad : ok,
+      btnBg: solid ? '#e6eef8' : 'transparent', btnColor: solid ? '#05070a' : '#f2f4f7',
+      btnLabel: s.sending ? 'Sending…' : 'Send note',
+      onName: ev => this.setState({ name: ev.target.value }),
+      onEmail: ev => this.setState({ email: ev.target.value }),
+      onNote: ev => this.setState({ note: ev.target.value }),
+      blurName: () => this.setState(p => ({ touched: { ...p.touched, name: true } })),
+      blurEmail: () => this.setState(p => ({ touched: { ...p.touched, email: true } })),
+      submit: ev => this.submit(ev),
+    };
+  }
+}
+</script>

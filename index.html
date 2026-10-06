@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Metatron</title>
+<meta name="description" content="We're launching soon to fix predictive blind spots. Test early insights on your own data or talk with our founding team.">
+<link rel="preload" href="assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/raleway-600-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main class="page">
+  <div class="bg" aria-hidden="true"></div>
+  <div class="overlay" aria-hidden="true"></div>
+
+  <div class="content">
+    <div class="stack">
+      <header class="intro">
+        <h1>Metatron</h1>
+        <p>We’re launching soon to fix predictive blind spots. Drop us a note to test early insights on your own data or talk with our founding team.</p>
+      </header>
+
+      <div class="success" id="success" hidden>
+        <span class="eyebrow">Message received</span>
+        <p id="success-msg"></p>
+      </div>
+
+      <form id="contact" novalidate data-endpoint="https://script.google.com/macros/s/AKfycby-rSQ4V_kfU2_NtYznqkLeW7cXwyNaq0hUFwGAv3nIm2HUWSZgoiJLJumftzCt1XFF/exec">
+        <label class="field">
+          <span class="label">Name <span class="req">*</span></span>
+          <input type="text" name="name" autocomplete="name" placeholder="Full name" aria-describedby="name-error">
+          <span class="error" id="name-error" hidden></span>
+        </label>
+
+        <label class="field">
+          <span class="label">Email address <span class="req">*</span></span>
+          <input type="email" name="email" autocomplete="email" inputmode="email" placeholder="name@work-email.com" aria-describedby="email-error">
+          <span class="error" id="email-error" hidden></span>
+        </label>
+
+        <label class="field">
+          <span class="label">Note <span class="opt">(optional)</span></span>
+          <textarea name="note" rows="4" placeholder="leave us a note"></textarea>
+        </label>
+
+        <!-- Honeypot: invisible to people, filled in by most bots. Submissions that
+             carry a value here are dropped server-side. Not a .field — stays hidden. -->
+        <input class="hp" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+        <div class="actions">
+          <button type="submit" class="btn btn--solid">Send note</button>
+          <span class="error" id="submit-error" role="alert" hidden></span>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>
+<script src="main.js"></script>
+</body>
+</html>
