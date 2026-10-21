@@ -34,18 +34,24 @@
   --shadow-strong: 0 1px 3px rgba(0,0,0,0.95), 0 0 14px rgba(0,0,0,0.9), 0 0 28px rgba(0,0,0,0.7);
   --shadow-label: 0 1px 3px rgba(0,0,0,0.95), 0 0 12px rgba(0,0,0,0.85);
   --mobile-bp: 820px; /* reference only; media queries below hardcode it */
+  --banner-bg: #ffffff;
+  --banner-ink: #0b2d5b; /* navy from the /iaass2026 guide */
 }
 
 /* ---------- Base ---------- */
 *, *::before, *::after { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; background: var(--bg); }
-body { font-family: 'Manrope', system-ui, sans-serif; color: var(--text); -webkit-font-smoothing: antialiased; }
+body { min-height: 100vh; display: flex; flex-direction: column; font-family: 'Manrope', system-ui, sans-serif; color: var(--text); -webkit-font-smoothing: antialiased; }
 a { color: var(--accent); } a:hover { color: #fff; }
 input::placeholder, textarea::placeholder { color: var(--placeholder); }
 input:-webkit-autofill { -webkit-text-fill-color: var(--text); -webkit-box-shadow: 0 0 0 1000px #0b0f15 inset; }
 
+/* ---------- Banner ---------- */
+.banner { position: relative; z-index: 2; background: var(--banner-bg); color: var(--banner-ink); text-align: center; padding: 12px 16px; }
+.banner p { margin: 0; font-family: 'Raleway', sans-serif; font-weight: 600; font-size: clamp(15px, 1.3vw, 18px); line-height: 1.35; letter-spacing: 0.01em; font-variant-numeric: lining-nums; }
+
 /* ---------- Layout ---------- */
-.page { position: relative; min-height: 100vh; width: 100%; overflow: hidden; background: var(--bg); }
+.page { position: relative; flex: 1; display: flex; flex-direction: column; width: 100%; overflow: hidden; background: var(--bg); }
 
 .bg {
   position: absolute; inset: 0;
@@ -58,7 +64,7 @@ input:-webkit-autofill { -webkit-text-fill-color: var(--text); -webkit-box-shado
   background: linear-gradient(90deg, rgba(5,7,10,0.85) 0%, rgba(5,7,10,0.55) 35%, rgba(5,7,10,0) 60%);
 }
 .content {
-  position: relative; min-height: 100vh;
+  position: relative; flex: 1;
   display: flex; flex-direction: column; justify-content: center;
   padding: clamp(28px, 6vw, 96px) clamp(22px, 7vw, 120px);
 }
@@ -81,6 +87,13 @@ input:-webkit-autofill { -webkit-text-fill-color: var(--text); -webkit-box-shado
   margin: 0; font-size: clamp(16px, 1.25vw, 18px); line-height: 1.6; color: var(--text-soft);
   text-shadow: var(--shadow-strong); text-wrap: pretty;
 }
+
+.guide-link {
+  align-self: flex-start; font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 1.6;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); text-decoration: none;
+  border-bottom: 1px solid rgba(184,212,242,0.45); padding-bottom: 2px; text-shadow: var(--shadow-label);
+}
+.guide-link:hover { color: #fff; border-color: #fff; }
 
 /* ---------- Form ---------- */
 form { display: flex; flex-direction: column; gap: 22px; }
