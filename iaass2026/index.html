@@ -50,6 +50,8 @@
     --q4: #17845e;
     --env: #e07b24;
     --miss: #1f4e96;
+    --cta-bg: var(--hero-bg);   /* reuse the hero pairing: navy on the light page */
+    --cta-ink: var(--hero-ink);
     /* Type aligned with the landing page (index.html / fonts.css) */
     --display: "Raleway", system-ui, sans-serif;      /* headings, big numbers */
     --sans: "Manrope", system-ui, sans-serif;         /* body */
@@ -73,6 +75,8 @@
       --q4: #4fcf9f;
       --env: #f2a052;
       --miss: #9dbdf3;
+      --cta-bg: var(--hero-ink);  /* inverted on the dark page: white on navy ink */
+      --cta-ink: var(--hero-bg);
     }
   }
 
@@ -214,8 +218,8 @@
   .contact p { margin: 0 0 1.5rem; max-width: 36rem; }
   .cta {
     display: inline-block;
-    background: var(--env);
-    color: #1a1206;
+    background: var(--cta-bg);
+    color: var(--cta-ink);
     font-weight: 700;
     text-decoration: none;
     padding: 0.8rem 1.4rem;
