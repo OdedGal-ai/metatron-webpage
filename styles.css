@@ -72,7 +72,9 @@ input:-webkit-autofill { -webkit-text-fill-color: var(--text); -webkit-box-shado
 
 @media (max-width: 819.98px) {
   .bg { background-image: url('assets/bg-mobile.webp'); background-size: 210% auto; background-position: 88% 0%; }
-  .overlay { background: linear-gradient(180deg, rgba(5,7,10,0) 0px, rgba(5,7,10,0) 160px, rgba(5,7,10,0.7) 320px, var(--bg) 440px); }
+  /* Reaches solid well before the text starts: with the form visible the hero
+     content sits about 90px down, far above the old 440px solid point. */
+  .overlay { background: linear-gradient(180deg, rgba(5,7,10,0) 0px, rgba(5,7,10,0) 40px, rgba(5,7,10,0.72) 140px, var(--bg) 240px); }
   .content { justify-content: flex-end; }
 }
 
